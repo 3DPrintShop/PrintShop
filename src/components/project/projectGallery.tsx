@@ -162,7 +162,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CREATE_IMAGE = gql`
     mutation uploadImage($projectId: ID!, $request: UploadImageRequest!){
-        uploadImageToProject(projectId: $projectId, request: $component)
+        uploadImageToProject(projectId: $projectId, request: $request)
     }
 `
 
