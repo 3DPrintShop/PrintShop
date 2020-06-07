@@ -37,6 +37,11 @@ query getProject($projectId: ID) {
     components {
         id,
         name
+    },
+    images {
+        id,
+        type,
+        path
     }
   }
 }
@@ -114,8 +119,10 @@ type Variables = {
     projectId: string
 }
 
-type Image = {
-    url: string
+type ProjectImage = {
+    id: string,
+    type: string,
+    path: string,
 }
 
 type UserProfile = {
@@ -131,7 +138,7 @@ type Project = {
     name: string,
     id: string,
     public: boolean
-    images: Image[]
+    images: ProjectImage[]
     author: UserProfile
     lastUpdated: string
     creationDate: string
@@ -206,7 +213,15 @@ function Project(props: {width: Breakpoint}) {
 
     let project = data.projects[0]
 
-    project.images = [{url: "/Placeholder.png"},{url: "/Placeholder.png"},{url: "/Placeholder.png"},{url: "/Placeholder.png"},{url: "/Placeholder.png"},{url: "/Placeholder.png"}]
+    if(project.images.length == 0){
+        let image : ProjectImage = {
+            id: "Placeholder",
+            path: "/Placeholder.png",
+            type: ".png"
+        };
+        project.images.push(image)
+    }
+
     project.author = {displayName: "3DPrintShop"}
     project.lastUpdated = "5/22/2020 12:30PM UTC"
     project.creationDate = "1/1/2020 3:30AM UTC"
@@ -225,7 +240,7 @@ function Project(props: {width: Breakpoint}) {
                     <DialogContent>
                         <DialogContent>
                             <DialogContentText>
-                                To create a new printer please fill in the required fields.
+                                To create a new component please fill in the required fields.
                             </DialogContentText>
                             <input
                                 accept="model/stl"

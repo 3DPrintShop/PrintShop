@@ -168,7 +168,9 @@ const CREATE_IMAGE = gql`
 
 
 type Image = {
-    url: string
+    id: string,
+    type: string,
+    path: string,
 }
 
 type ProjectGalleryProps = {
@@ -325,14 +327,14 @@ function ProjectGallery({images, projectId, width}: ProjectGalleryProps) {
             </Dialog>
 
             <Grid item xs={12}>
-                <Paper elevation={3} className={classes.projectImage} style={{backgroundImage: "url("+images[imageIndex].url+")"}}>
+                <Paper elevation={3} className={classes.projectImage} style={{backgroundImage: "url(http://localhost:8000"+images[imageIndex].path+")"}}>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <GridList spacing={4} cols={getCols()} cellHeight={getCellHeight()} className={classes.thumbnailList}>
                     {images.map((image, index) => (
                         <GridListTile className={classes.tile} onClick={() => updateImageIndex(index)}>
-                            <Paper elevation={3} className={getThumbnailClass(index)} style={{backgroundImage: "url("+image.url+")"}}>
+                            <Paper elevation={3} className={getThumbnailClass(index)} style={{backgroundImage: "url(http://localhost:8000"+image.path+")"}}>
                             </Paper>
                         </GridListTile>
                     ))}
