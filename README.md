@@ -1,2 +1,1 @@
-# PrintShop
-React frontend over PrintQL
+Printshop, 3D printer management webapp.
